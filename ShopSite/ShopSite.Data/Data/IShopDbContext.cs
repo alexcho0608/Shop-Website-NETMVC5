@@ -6,9 +6,9 @@
 
     public interface IShopDbContext
     {
-        IDbSet<Commit> Commits { get; set; }
+        IDbSet<Item> Items { get; set; }
 
-        IDbSet<SoftwareProject> SoftwareProjects { get; set; }
+        IDbSet<Rating> Ratings { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 

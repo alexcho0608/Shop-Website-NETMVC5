@@ -1,6 +1,7 @@
 ﻿namespace ShopSite.Data.Models
 {
-    class Rating
+    public class Rating
     {
+        public int Id { get; set; }
     }
 }

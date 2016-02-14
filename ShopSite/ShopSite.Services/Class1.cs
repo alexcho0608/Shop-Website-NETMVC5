@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopSite.Data.Models
+namespace ShopSite.Services
 {
-    public class Item
+    public class Class1
     {
-        public int Id { get; set; }
     }
 }

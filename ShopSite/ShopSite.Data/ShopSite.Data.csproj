@@ -61,6 +61,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IShopDbContext.cs" />
     <Compile Include="Data\ShopDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\User.cs" />

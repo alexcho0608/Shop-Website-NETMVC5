@@ -6,18 +6,18 @@
 
     public class ShopDbContext : IdentityDbContext<User>, IShopDbContext
     {
-        public SourceControlSystemDbContext()
+        public ShopDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public virtual IDbSet<Commit> Commits { get; set; }
+        public virtual IDbSet<Item> Items { get; set; }
 
-        public virtual IDbSet<SoftwareProject> SoftwareProjects { get; set; }
+        public virtual IDbSet<Rating> Ratings { get; set; }
 
-        public static SourceControlSystemDbContext Create()
+        public static ShopDbContext Create()
         {
-            return new SourceControlSystemDbContext();
+            return new ShopDbContext();
         }
     }
 }
