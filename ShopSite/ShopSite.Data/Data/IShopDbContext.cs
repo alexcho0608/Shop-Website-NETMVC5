@@ -10,6 +10,12 @@
 
         IDbSet<Rating> Ratings { get; set; }
 
+        IDbSet<Category> Categories { get; set; }
+
+        IDbSet<Order> Orders { get; set; }
+
+        IDbSet<OrderToItem> OrderToItems { get; set; }
+
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

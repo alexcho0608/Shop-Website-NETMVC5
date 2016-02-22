@@ -1,0 +1,21 @@
+﻿
+@(Html.Kendo().Grid<ShopSite.Data.Models.Item>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Title);
+        columns.Bound(c => c.Description);
+        columns.Bound(c => c.Price);
+        columns.Bound(c => c.Pieces);
+        columns.Bound(c => c.DateCreated);
+        columns.Command(command => { command.Edit(); }).Width(180);
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Items_Read", "Test"))
+          .Update(update => update.Action("Items_Update", "Test"))
+      )
+)

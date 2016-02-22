@@ -9,6 +9,12 @@
     padding-right: 15px;
 }
 
+.headerSearch {
+    display: inline;
+    padding-top: 10px;
+    padding-left:10px;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

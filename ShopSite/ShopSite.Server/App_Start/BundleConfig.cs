@@ -19,6 +19,12 @@ namespace ShopSite.Server
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+            "~/Scripts/kendo.all.min.js",
+            "~/Scripts/kendo.aspnetmvc.min.js",
+            "~/Scripts/kendo.culture.en-GB.min.js"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
@@ -26,6 +32,11 @@ namespace ShopSite.Server
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+            "~/Content/Kendo/kendo.common.min.css",
+            "~/Content/Kendo/kendo.common-bootstrap.min.css",
+            "~/Content/Kendo/kendo.silver.min.css"));
         }
     }
 }
