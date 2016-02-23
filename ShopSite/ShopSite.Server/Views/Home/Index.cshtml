@@ -9,19 +9,11 @@
         <hr />
         foreach (var item in categoryItems.items)
         {
-            <div class="row">
-                @item.Title
-            </div>
-            <div class="row">
-                @item.Description
-            </div>
-            <div class="row text-right">
-                @item.Price
-            </div>
-            <br />
+            @Html.Partial("ItemPartial", item);
         }
         <hr />
     }
+</div>
 @section scripts{
     <script>
         $("div[data-action='up'").click(function () {

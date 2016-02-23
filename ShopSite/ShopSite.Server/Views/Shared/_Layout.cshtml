@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                    <li><a href="/SearchItem/SearchByWord?Search="> Products </a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                     <li>@Html.ActionLink("Shopping cart", "Index", "Cart")</li>
@@ -38,17 +38,16 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink("Items", "Index", "AddItem")</li>
-                                <li>@Html.ActionLink("Users", "View", "Storage")</li>
+                                <li>@Html.ActionLink("Users", "Index", "Storage")</li>
                             </ul>
                         </li>
                     }
                     <li class="headerSearch">
-                        @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                        @using (Html.BeginForm("SearchByWord", "SearchItem", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
                         {
                             @Html.Label("Search");
                             @Html.TextBox("Search");
                             <input type="submit" value="Search" class="btn btn-default" />
-
                         }
                     </li>
                 </ul>
