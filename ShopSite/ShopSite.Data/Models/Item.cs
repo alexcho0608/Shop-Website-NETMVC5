@@ -28,6 +28,8 @@ namespace ShopSite.Data.Models
 
         public DateTime DateCreated { get; set; }
 
+        public string ImgUrl { get; set; }
+
         public virtual Category Category {get;set;}
 
         public ICollection<Rating> Ratings

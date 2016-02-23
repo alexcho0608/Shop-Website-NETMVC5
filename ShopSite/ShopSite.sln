@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopSite.Server", "ShopSite
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopSite.Services", "ShopSite.Services\ShopSite.Services.csproj", "{4BE2E29F-DA6A-41ED-9999-96EDBBA75783}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopSite.Infrastructure", "ShopSite.Infrastructure\ShopSite.Infrastructure.csproj", "{86CE0AEA-0F7E-4C82-98C2-E74D778B9FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4BE2E29F-DA6A-41ED-9999-96EDBBA75783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE2E29F-DA6A-41ED-9999-96EDBBA75783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE2E29F-DA6A-41ED-9999-96EDBBA75783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CE0AEA-0F7E-4C82-98C2-E74D778B9FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CE0AEA-0F7E-4C82-98C2-E74D778B9FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CE0AEA-0F7E-4C82-98C2-E74D778B9FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CE0AEA-0F7E-4C82-98C2-E74D778B9FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
