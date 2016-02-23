@@ -1,0 +1,35 @@
+﻿<div class="row">
+    @using (Html.BeginForm("Search", "SearchItem", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        <div class="col-sm-4">
+            Category:
+            <br />
+            <input type="checkbox" name="category" value="Laptop"> Laptop
+            <input type="checkbox" name="category" value="Cooler"> Cooler <br>
+            <input type="checkbox" name="category" value="Monitor"> Monitor
+            <input type="checkbox" name="category" value="Watches"> Watches<br>
+            <input type="checkbox" name="category" value="Phones"> Phones
+            <input type="checkbox" name="category" value="TVs"> TVs <br>
+            <input type="checkbox" name="category" value="Cameras"> Cameras <br>
+        </div>
+        <div class="col-sm-4">
+            <label for="pageSize"> Items: </label>&nbsp;
+            <select name="pageSize">
+                <option>5</option>
+                <option>10</option>
+                <option>50</option>
+            </select>
+            <label for="sort"> Sort: </label>&nbsp;
+            <select name="sort">
+                <option>Title</option>
+                <option>Description</option>
+                <option>Date</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label for="search"> Search: </label>&nbsp;
+            <input type="text" name="search" id="search" />
+            <button type="submit" id="searchInitButton">Search</button>
+        </div>
+    }
+</div>

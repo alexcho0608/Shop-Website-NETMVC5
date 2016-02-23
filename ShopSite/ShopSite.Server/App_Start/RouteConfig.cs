@@ -14,6 +14,13 @@ namespace ShopSite.Server
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+            "SearchItem",
+            "SearchItem/ViewPage/{page}/{pageSize}",
+            new { controller = "SearchItem", action = "ViewPage" },
+            new {page=@"\d*",pageSize=@"\d*"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
