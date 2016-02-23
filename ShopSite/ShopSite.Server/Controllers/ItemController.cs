@@ -13,12 +13,12 @@ using System.Web.Mvc;
 
 namespace ShopSite.Server.Controllers
 {
-    public class SearchItemController : Controller
+    public class ItemController : Controller
     {
 
         private IRepository<Item> itemRepository;
 
-        public SearchItemController(IRepository<Item> repository)
+        public ItemController(IRepository<Item> repository)
         {
             this.itemRepository = repository;
         }
@@ -112,6 +112,14 @@ namespace ShopSite.Server.Controllers
             };
 
             return View("Index", viewData);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var item = itemRepository.GetById(id);
+
+            var viewItem = AutoMapper.Mapper.Map<ItemResponseViewModel>(item);
+            return View(viewItem);
         }
 
         // POST: SearchItem/Create

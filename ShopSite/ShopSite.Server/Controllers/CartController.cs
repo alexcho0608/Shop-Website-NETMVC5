@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using ShopSite.Data.Data;
+using ShopSite.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,17 @@ namespace ShopSite.Server.Controllers
 {
     public class CartController : Controller
     {
+        private IRepository<OrderToItem> orderToItemReposiotry;
+        private IRepository<Order> orderRepository;
+        private IRepository<Item> itemRepository;
+
+        public CartController(IRepository<OrderToItem> repo, IRepository<Order> repo2,
+            IRepository<Item> repo3)
+        {
+            this.orderToItemReposiotry = repo;
+            this.orderRepository = repo2;
+            this.itemRepository = repo3;
+        }
         // GET: Cart
         public ActionResult Index()
         {
@@ -50,13 +64,50 @@ namespace ShopSite.Server.Controllers
 
         // POST: Cart/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Insert()
         {
+            var form = this.Request.Form;
+
+            var userId = User.Identity.GetUserId();
+            var order = orderRepository.All().Where(o => o.UserId == userId && o.Status == "Pending");
+            int orederId = 0;
+            if (order.Count() == 0)
+            {
+                var newOrder = new Order()
+                {
+                    UserId = userId,
+                    Status = "Pending"
+                };
+                orderRepository.Add(newOrder);
+                orderRepository.SaveChanges();
+                orederId = newOrder.Id;
+            }
+            else
+            {
+                orederId = order.First().Id;
+            }
+
+            var id = int.Parse(form["id"].ToString());
+            var item = itemRepository.GetById(id);
+            var total = int.Parse(form["total"].ToString());
+
+            for (int i = 0; i < total; i++)
+            {
+                var orderToItem = new OrderToItem()
+                {
+                    ItemId = id,
+                    OrderId = orederId
+                };
+                orderToItemReposiotry.Add(orderToItem);
+            }
+            orderToItemReposiotry.SaveChanges();
+            item.Pieces -= total;
+            itemRepository.SaveChanges();
+
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return this.Redirect("/Home");
             }
             catch
             {

@@ -11,6 +11,8 @@ namespace ShopSite.Data.Models
     public class OrderToItem
     {
         [Key]
+        public int Id { get; set; }
+
         public int OrderId { get; set; }
 
         [ForeignKey("OrderId")]
@@ -20,5 +22,9 @@ namespace ShopSite.Data.Models
 
         [ForeignKey("ItemId")]
         public virtual Item Item { get; set; }
+
+        public bool Pending { get; set; }
+
+        public bool Cancelled { get; set; }
     }
 }

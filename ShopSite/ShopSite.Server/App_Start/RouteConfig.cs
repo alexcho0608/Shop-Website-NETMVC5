@@ -15,8 +15,8 @@ namespace ShopSite.Server
 
             routes.MapRoute(
             "SearchItem",
-            "SearchItem/ViewPage/{page}/{pageSize}",
-            new { controller = "SearchItem", action = "ViewPage" },
+            "Item/ViewPage/{page}/{pageSize}",
+            new { controller = "Item", action = "ViewPage" },
             new {page=@"\d*",pageSize=@"\d*"}
             );
 
