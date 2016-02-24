@@ -25,11 +25,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li><a href="/Item/SearchByWord?Search="> Products </a></li>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("user"))
                     {
                     <li>@Html.ActionLink("Shopping cart", "Index", "Cart")</li>
                     }
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("admin"))
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -37,8 +37,8 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Items", "Index", "AddItem")</li>
-                                <li>@Html.ActionLink("Users", "Index", "Storage")</li>
+                                <li>@Html.ActionLink("Items", "Index", "ItemAdd", new { Area = "Administrator" }, null)</li>
+                                <li>@Html.ActionLink("Users", "Index", "Storage",new { Area = "Administrator" }, null)</li>
                             </ul>
                         </li>
                     }
