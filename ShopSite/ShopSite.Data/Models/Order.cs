@@ -22,6 +22,6 @@ namespace ShopSite.Data.Models
 
         public string Status { get; set; }
 
-        public DateTime DateOrdered { get; set; }
+        public DateTime? DateOrdered { get; set; }
     }
 }

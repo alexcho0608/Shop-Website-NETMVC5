@@ -1,0 +1,36 @@
+﻿@model ShopSite.Server.Models.Items.ItemResponseViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<h1>Title: @Model.Title</h1>
+
+Description: @Model.Description <br />
+
+Date Created: @Model.DateCreated <br />
+
+@if (Model.Pieces > 0)
+{
+    using (Html.BeginForm("Insert", "Cart",FormMethod.Post,new { @class = "form-control" }))
+    {
+        
+IEnumerable<int> numbers = Enumerable.Range(1, Model.Pieces);
+        List<SelectListItem> list = new List<SelectListItem>();
+        foreach (var i in numbers)
+        {
+            list.Add(new SelectListItem()
+            {
+                Text = i.ToString(),
+                Value = i.ToString(),
+            });
+        };
+        @Html.AntiForgeryToken();
+        @Html.Hidden("id", Model.Id);
+        <label for="total">Total:</label>
+        @Html.DropDownList("total", list, "-- Select Status --");
+        <input type="submit" value="To cart" />
+    }
+}

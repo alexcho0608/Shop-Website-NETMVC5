@@ -230,7 +230,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\SearchItemController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +241,8 @@
     <Compile Include="Models\Items\ItemSearchViewModel.cs" />
     <Compile Include="Models\Items\SearchItemRequestModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order\CartViewModel.cs" />
+    <Compile Include="Models\Order\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -312,8 +314,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\ItemPartial.cshtml" />
-    <Content Include="Views\SearchItem\Index.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Shared\SearchPanel.cshtml" />
+    <Content Include="Views\Item\Details.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\Empty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,7 +327,6 @@
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Areas\User\Views\ShoppingCart\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Cart\" />
     <Folder Include="Views\ItemAdd\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Test\" />

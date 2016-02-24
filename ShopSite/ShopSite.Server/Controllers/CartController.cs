@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using ShopSite.Data.Data;
+using ShopSite.Data.Models;
+using ShopSite.Server.Models;
+using ShopSite.Server.Models.Order;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,77 +13,107 @@ namespace ShopSite.Server.Controllers
 {
     public class CartController : Controller
     {
-        // GET: Cart
+        private IRepository<OrderToItem> orderToItemReposiotry;
+        private IRepository<Order> orderRepository;
+        private IRepository<Item> itemRepository;
+        private ShopDbContext db;
+
+        public CartController(IRepository<OrderToItem> repo, IRepository<Order> repo2,
+            IRepository<Item> repo3)
+        {
+            this.orderToItemReposiotry = repo;
+            this.orderRepository = repo2;
+            this.itemRepository = repo3;
+            this.db = new ShopDbContext();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var order = orderRepository.All().Where(o => o.Status == "Pending" && o.UserId == userId);
+            if(order.Count()==0)
+            {
+                return View("Empty");
+            }
+
+            var orderId = order.First().Id;
+
+            var orders = from o in db.OrderToItems
+                        join e in db.Items on o.ItemId equals e.Id
+                        group o by o.ItemId into pg
+                        select new OrderViewModel
+                        {
+                            Item = pg.FirstOrDefault().Item,
+                            Total = pg.Count()
+                        };
+            var viewData = new CartViewModel()
+            {
+                Orders = orders,
+                OrderId = orderId
+            };
+
+            return View(viewData);
         }
 
-        // GET: Cart/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Cart/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Cart/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Order()
         {
+            var form = this.Request.Form;
+            var orderId = int.Parse(form["orderId"]);
+            var order = orderRepository.All().Where(o => o.Id == orderId).First();
+            order.Status = "Completed";
+            orderRepository.SaveChanges();
+
+            this.Response.Redirect("/Home");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Insert()
+        {
+            var form = this.Request.Form;
+
+            var userId = User.Identity.GetUserId();
+            var order = orderRepository.All().Where(o => o.UserId == userId && o.Status == "Pending");
+            int orederId = 0;
+            if (order.Count() == 0)
+            {
+                var newOrder = new Order()
+                {
+                    UserId = userId,
+                    Status = "Pending"
+                };
+                orderRepository.Add(newOrder);
+                orderRepository.SaveChanges();
+                orederId = newOrder.Id;
+            }
+            else
+            {
+                orederId = order.First().Id;
+            }
+
+            var id = int.Parse(form["id"].ToString());
+            var item = itemRepository.GetById(id);
+            var total = int.Parse(form["total"].ToString());
+
+            for (int i = 0; i < total; i++)
+            {
+                var orderToItem = new OrderToItem()
+                {
+                    ItemId = id,
+                    OrderId = orederId
+                };
+                orderToItemReposiotry.Add(orderToItem);
+            }
+            orderToItemReposiotry.SaveChanges();
+            item.Pieces -= total;
+            itemRepository.SaveChanges();
+
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cart/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Cart/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cart/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Cart/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return this.Redirect("/Home");
             }
             catch
             {

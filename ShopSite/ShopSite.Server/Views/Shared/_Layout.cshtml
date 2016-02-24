@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li><a href="/SearchItem/SearchByWord?Search="> Products </a></li>
+                    <li><a href="/Item/SearchByWord?Search="> Products </a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                     <li>@Html.ActionLink("Shopping cart", "Index", "Cart")</li>
@@ -43,7 +43,7 @@
                         </li>
                     }
                     <li class="headerSearch">
-                        @using (Html.BeginForm("SearchByWord", "SearchItem", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                        @using (Html.BeginForm("SearchByWord", "Item", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
                         {
                             @Html.Label("Search");
                             @Html.TextBox("Search");
