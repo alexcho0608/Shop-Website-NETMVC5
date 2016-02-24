@@ -1,7 +1,27 @@
-﻿
+﻿@model ShopSite.Server.Models.Order.CartViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Orders</h2>
+@foreach (var order in Model.Orders)
+{
+    <div class="row">
+        <a href="/Item/Details/@order.Item.Id">@order.Item.Title</a>
+    </div>
+    <div class="row text-right">
+        Price: @order.Item.Price
+    </div>
+    <div class="row text-right">
+       Total: @order.Total
+    </div>
+    <hr />
+    <br />
+}
 
+@using (Html.BeginForm("Order", "Cart", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    @Html.Hidden("orderId", Model.OrderId);
+    <input type="submit" value="order" />
+}
